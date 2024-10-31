@@ -1,0 +1,110 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{fontawesome}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{needspace}
+
+\definecolor{primary}{RGB}{70,70,70}
+\definecolor{accent}{RGB}{0,112,201}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  filecolor=primary,
+  urlcolor=accent,
+}
+
+\titlespacing{\section}{0pt}{1em}{0.5em}
+
+\titleformat{\section}
+  {\Large\bfseries\color{primary}}
+  {}
+  {0em}
+  {}
+  [\vspace{-0.5em}\rule{\textwidth}{0.4pt}]
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\setlist[itemize]{leftmargin=*}
+
+\begin{document}
+
+{\LARGE\bfseries\color{primary} {{.Basics.Name | escapeTeX}}}
+
+\vspace{0.5em}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+\begin{tabularx}{\textwidth}{L R}
+{{.Basics.Location.Region | escapeTeX}}, {{.Basics.Location.CountryCode | escapeTeX}} &
+{{.Basics.Phone | formatPhone | printf "\\href{tel:%s}"}}{{.Basics.Phone | escapeTeX | printf "{%s}"}} \\
+{{.Basics.Email | printf "\\href{mailto:%s}"}}{{.Basics.Email | escapeTeX | printf "{%s}"}} &
+{{.Basics.URL | printf "\\href{%s}"}}{{.Basics.URL | escapeTeX | formatUrl | printf "{%s}"}} \\
+{{"linkedin" | getProfileUrl .Basics.Profiles | printf "\\href{%s}"}}{{"linkedin" | getProfileUrl .Basics.Profiles | formatUrl | printf "{%s}"}} &
+{{"github" | getProfileUrl .Basics.Profiles | printf "\\href{%s}"}}{{"github" | getProfileUrl .Basics.Profiles | formatUrl | printf "{%s}"}} \\
+\end{tabularx}
+
+\section*{Summary}
+{{.Basics.Summary | escapeTeX}}
+
+\section*{Experience}
+{{range .Work}}
+\needspace{6\baselineskip}
+{{.Name | escapeTeX | printf "\\textbf{%s}"}} \hfill {{.Location | escapeTeX}} \\
+{{.Position | escapeTeX | printf "\\textit{%s}"}} \hfill {{.StartDate | formatDate}} - {{.EndDate | formatDate}}
+{{if .Highlights}}
+\begin{itemize}
+  \setlength\itemsep{0pt}
+  {{range .Highlights}}\item {{. | escapeTeX}}{{end}}
+\end{itemize}
+{{end}}
+{{end}}
+
+\needspace{3\baselineskip}
+\section*{Technical Skills}
+\begin{itemize}[label={}]
+  \setlength\itemsep{-0.25em}
+  {{range .Skills}}\item {{.Name | escapeTeX | printf "\\textbf{%s}"}}: {{join .Keywords ", " | escapeTeX}}{{end}}
+\end{itemize}
+
+
+\section*{Projects}
+{{range .Projects}}
+\needspace{3\baselineskip}
+{{.Name | escapeTeX | printf "\\textbf{%s}"}} --- {{.Description | escapeTeX}}
+{{if .Highlights}}
+\begin{itemize}
+  \setlength\itemsep{-0.25em}
+  {{range .Highlights}}\item {{. | escapeTeX}}{{end}}
+\end{itemize}
+{{end}}
+{{end}}
+
+\section*{Education}
+{{range .Education}}
+{{.Institution | escapeTeX | printf "\\textbf{%s}"}} \hfill {{.Location | escapeTeX}} \\
+{{.StudyType | escapeTeX | printf "\\textit{%s}"}} \hfill {{.StartDate | formatDate}} - {{.EndDate | formatDate}} \\
+{{end}}
+
+\section*{Awards}
+{{range .Awards}}
+{{.Awarder | escapeTeX | printf "\\textbf{%s}"}} \hfill {{.Location | escapeTeX}} \\
+{{.Title | escapeTeX | printf "\\textit{%s}"}} \hfill {{.Date | formatDate}}
+\begin{itemize}[label={}]
+\item {{.Summary | escapeTeX}}
+\end{itemize}
+{{end}}
+
+\section*{Languages}
+{{range $i, $l := .Languages}}{{if $i}}, {{end}}{{$l.Language}} ({{$l.Fluency}}){{end}}
+
+\end{document}
