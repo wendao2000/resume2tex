@@ -1,0 +1,252 @@
+{
+    "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+    "basics": {
+        "name": "Alex Park",
+        "label": "Full Stack Software Engineer",
+        "image": "",
+        "email": "alex.park@example.com",
+        "phone": "(650) 555-7890",
+        "url": "http://alexpark.dev",
+        "summary": "Full-stack software engineer with 5+ years of experience building scalable web applications. Specialized in React, Node.js, and cloud architecture. Passionate about clean code, test-driven development, and mentoring. Active open-source contributor with 1000+ GitHub contributions in the last year. Regular tech blogger sharing insights about software architecture and development best practices.",
+        "location": {
+            "address": "123 Tech Park Drive",
+            "postalCode": "CA 94040",
+            "city": "Mountain View",
+            "countryCode": "US",
+            "region": "California"
+        },
+        "profiles": [
+            {
+                "network": "LinkedIn",
+                "username": "alexpark-dev",
+                "url": "https://www.linkedin.com/in/alexpark-dev"
+            },
+            {
+                "network": "GitHub",
+                "username": "apark-dev",
+                "url": "https://github.com/apark-dev"
+            },
+            {
+                "network": "Dev.to",
+                "username": "alexpark",
+                "url": "https://dev.to/alexpark"
+            }
+        ]
+    },
+    "work": [
+        {
+            "name": "StreamLine Technologies",
+            "location": "Mountain View, CA",
+            "description": "Enterprise SaaS platform provider",
+            "position": "Senior Software Engineer",
+            "url": "http://streamline.example.com",
+            "startDate": "2022-01-01",
+            "endDate": "2024-01-01",
+            "summary": "Tech lead for the core platform team, focusing on microservices architecture and real-time data processing.",
+            "highlights": [
+                "Led migration from monolith to microservices, reducing deployment time by 70%",
+                "Implemented real-time collaboration features using WebSocket, serving 100K+ concurrent users",
+                "Reduced API response times by 40% through caching optimization and query tuning",
+                "Mentored 4 junior developers and established team code review practices"
+            ]
+        },
+        {
+            "name": "DataFlow Solutions",
+            "location": "San Francisco, CA",
+            "description": "Data analytics startup",
+            "position": "Full Stack Engineer",
+            "url": "http://dataflow.example.com",
+            "startDate": "2019-03-01",
+            "endDate": "2021-12-31",
+            "summary": "Full-stack developer for data visualization and analytics platform.",
+            "highlights": [
+                "Built interactive dashboard using React and D3.js, processing 1M+ data points",
+                "Developed RESTful APIs using Node.js and Express, handling 500K daily requests",
+                "Implemented OAuth2 authentication system and role-based access control",
+                "Reduced bundle size by 45% through code splitting and lazy loading"
+            ]
+        }
+    ],
+    "volunteer": [
+        {
+            "organization": "Code For Good",
+            "position": "Technical Lead",
+            "url": "http://codeforgood.org",
+            "startDate": "2021-06-01",
+            "endDate": "2024-01-01",
+            "summary": "Lead developer for non-profit projects.",
+            "highlights": [
+                "Developed pro-bono websites for 3 local non-profits",
+                "Organized monthly coding workshops for beginners"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "institution": "University of California, Berkeley",
+            "url": "https://www.berkeley.edu/",
+            "area": "Computer Science",
+            "studyType": "Bachelor",
+            "startDate": "2015-08-01",
+            "endDate": "2019-05-01",
+            "score": "3.8",
+            "courses": [
+                "Data Structures and Algorithms",
+                "Web Architecture",
+                "Database Systems",
+                "Software Engineering"
+            ]
+        }
+    ],
+    "awards": [
+        {
+            "title": "Innovation Excellence Award",
+            "date": "2023-11-01",
+            "awarder": "StreamLine Technologies",
+            "summary": "Awarded for developing an innovative real-time collaboration system."
+        }
+    ],
+    "publications": [
+        {
+            "name": "Building Scalable Real-time Applications with WebSocket",
+            "publisher": "Medium",
+            "releaseDate": "2023-06-01",
+            "url": "http://medium.com/@alexpark/websocket-scale",
+            "summary": "Technical deep-dive into building and scaling WebSocket applications."
+        }
+    ],
+    "skills": [
+        {
+            "name": "Frontend Development",
+            "level": "Expert",
+            "keywords": [
+                "React",
+                "TypeScript",
+                "Redux",
+                "Webpack",
+                "Tailwind CSS"
+            ]
+        },
+        {
+            "name": "Backend Development",
+            "level": "Expert",
+            "keywords": [
+                "Node.js",
+                "Express",
+                "Python",
+                "Django",
+                "RESTful APIs"
+            ]
+        },
+        {
+            "name": "DevOps & Cloud",
+            "level": "Intermediate",
+            "keywords": [
+                "AWS",
+                "Docker",
+                "CI/CD",
+                "Kubernetes",
+                "GitHub Actions"
+            ]
+        },
+        {
+            "name": "Databases",
+            "level": "Expert",
+            "keywords": [
+                "PostgreSQL",
+                "MongoDB",
+                "Redis",
+                "Elasticsearch"
+            ]
+        }
+    ],
+    "languages": [
+        {
+            "language": "English",
+            "fluency": "Native speaker"
+        },
+        {
+            "language": "Korean",
+            "fluency": "Conversational"
+        }
+    ],
+    "interests": [
+        {
+            "name": "Open Source",
+            "keywords": [
+                "React Libraries",
+                "Developer Tools",
+                "Testing Frameworks"
+            ]
+        },
+        {
+            "name": "Tech Writing",
+            "keywords": [
+                "Software Architecture",
+                "Best Practices",
+                "Tutorial Writing"
+            ]
+        }
+    ],
+    "references": [
+        {
+            "name": "Michael Torres",
+            "reference": "Alex is an exceptional engineer who combines deep technical expertise with great communication skills. Their contributions to our microservices architecture were instrumental to our platform's success."
+        }
+    ],
+    "projects": [
+        {
+            "name": "ReactQuery Builder",
+            "description": "Visual query builder component for React applications",
+            "highlights": [
+                "4.8k+ GitHub stars",
+                "100k+ monthly npm downloads",
+                "Used by companies like TechCorp and DataViz Inc.",
+                "98% test coverage"
+            ],
+            "keywords": [
+                "React",
+                "TypeScript",
+                "Jest",
+                "npm package"
+            ],
+            "startDate": "2022-03-01",
+            "endDate": "2024-01-01",
+            "url": "http://github.com/apark-dev/react-query-builder",
+            "roles": [
+                "Creator",
+                "Maintainer"
+            ],
+            "entity": "Open Source",
+            "type": "library"
+        },
+        {
+            "name": "DevTools Suite",
+            "description": "Collection of CLI tools for developer productivity",
+            "highlights": [
+                "1.2k+ GitHub stars",
+                "Featured in Awesome Node.js repository",
+                "Active community with 30+ contributors"
+            ],
+            "keywords": [
+                "Node.js",
+                "CLI",
+                "Developer Tools",
+                "npm"
+            ],
+            "startDate": "2023-01-01",
+            "endDate": "2024-01-01",
+            "url": "http://github.com/apark-dev/devtools-suite",
+            "roles": [
+                "Lead Developer"
+            ],
+            "entity": "Open Source",
+            "type": "application"
+        }
+    ],
+    "meta": {
+        "canonical": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/sample.resume.json",
+        "version": "v1.0.0",
+        "lastModified": "2024-01-15T10:30:00"
+    }
+}
