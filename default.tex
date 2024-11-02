@@ -56,6 +56,7 @@
 \section*{Summary}
 {{.Basics.Summary | escapeTeX}}
 
+\needspace{3\baselineskip}
 \section*{Experience}
 {{range .Work}}
 \needspace{6\baselineskip}
@@ -77,6 +78,7 @@
 \end{itemize}
 
 
+\needspace{3\baselineskip}
 \section*{Projects}
 {{range .Projects}}
 \needspace{3\baselineskip}
@@ -89,14 +91,18 @@
 {{end}}
 {{end}}
 
+\needspace{3\baselineskip}
 \section*{Education}
 {{range .Education}}
+\needspace{3\baselineskip}
 {{.Institution | escapeTeX | printf "\\textbf{%s}"}} \hfill {{.Location | escapeTeX}} \\
 {{.StudyType | escapeTeX | printf "\\textit{%s}"}} \hfill {{.StartDate | formatDate}} - {{.EndDate | formatDate}} \\
 {{end}}
 
+\needspace{3\baselineskip}
 \section*{Awards}
 {{range .Awards}}
+\needspace{3\baselineskip}
 {{.Awarder | escapeTeX | printf "\\textbf{%s}"}} \hfill {{.Location | escapeTeX}} \\
 {{.Title | escapeTeX | printf "\\textit{%s}"}} \hfill {{.Date | formatDate}}
 \begin{itemize}[label={}]
@@ -104,6 +110,7 @@
 \end{itemize}
 {{end}}
 
+\needspace{3\baselineskip}
 \section*{Languages}
 {{range $i, $l := .Languages}}{{if $i}}, {{end}}{{$l.Language}} ({{$l.Fluency}}){{end}}
 
