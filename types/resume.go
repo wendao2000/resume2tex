@@ -17,6 +17,8 @@ type Project struct {
 	Roles       []string `json:"roles"`
 	Entity      string   `json:"entity"`
 	Type        string   `json:"type"`
+	Status      string   `json:"status"`
+	Summary     string   `json:"summary"`
 }
 
 type Reference struct {

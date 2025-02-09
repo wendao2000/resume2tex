@@ -84,20 +84,21 @@ func validateFlag() error {
 
 func main() {
 	flag.StringVar(&resumeArgs, "resume", "resume.json", "Resume file")
-	flag.StringVar(&templateArgs, "templateFile", "default.tex", "Template file")
+	flag.StringVar(&templateArgs, "template", "default.tex", "Template file")
+	flag.Parse()
 
 	if validateFlag() != nil {
 		log.Fatal("Usage: json2tex [-resume=resume.json] [-template=template.tex]")
 	}
 
-	templateFile, err := os.ReadFile(templateArgs)
-	if err != nil {
-		log.Fatalf("Error reading template file: %v", err)
-	}
-
 	resumeFile, err := os.ReadFile(resumeArgs)
 	if err != nil {
 		log.Fatalf("Error reading resume file: %v", err)
+	}
+
+	templateFile, err := os.ReadFile(templateArgs)
+	if err != nil {
+		log.Fatalf("Error reading template file: %v", err)
 	}
 
 	var resume types.Resume
