@@ -24,14 +24,11 @@ var funcMap = template.FuncMap{
 		replacer := strings.NewReplacer(
 			"&", "\\&",
 			"%", "\\%",
-			"$", "\\$",
 			"#", "\\#",
 			"_", "\\_",
-			"{", "\\{",
-			"}", "\\}",
 			"~", "\\textasciitilde{}",
 			"^", "\\textasciicircum{}",
-			"\\", "\\textbackslash{}",
+			"≈", "\\approx",
 		)
 		return replacer.Replace(s)
 	},
