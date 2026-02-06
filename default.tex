@@ -123,7 +123,7 @@
 \section*{Awards}
 {{range .Awards}}
 \needspace{3\baselineskip}
-{{.Awarder | escapeTeX | printf "\\textbf{%s}"}} \hfill {{.Location | escapeTeX}} \\
+{{.Awarder | escapeTeX | printf "\\textbf{%s}"}}{{if .Location}} \hfill {{.Location | escapeTeX}}{{end}} \\
 {{.Title | escapeTeX | printf "\\textit{%s}"}} \hfill {{.Date | formatDate}}
 \begin{itemize}[label={}]
 \item {{.Summary | escapeTeX}}
