@@ -80,6 +80,14 @@ type Volunteer struct {
 	Highlights   []string `json:"highlights"`
 }
 
+type Role struct {
+	Position   string   `json:"position"`
+	StartDate  string   `json:"startDate"`
+	EndDate    string   `json:"endDate"`
+	Summary    string   `json:"summary"`
+	Highlights []string `json:"highlights"`
+}
+
 type Work struct {
 	Name        string   `json:"name"`
 	Location    string   `json:"location"`
@@ -90,6 +98,7 @@ type Work struct {
 	EndDate     string   `json:"endDate"`
 	Summary     string   `json:"summary"`
 	Highlights  []string `json:"highlights"`
+	Roles       []Role   `json:"roles"`
 }
 
 type Profile struct {

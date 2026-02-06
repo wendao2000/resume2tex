@@ -1,8 +1,8 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[10pt,a4paper]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.5in]{geometry}
 \usepackage{hyperref}
 \usepackage{fontawesome}
 \usepackage{titlesec}
@@ -21,25 +21,25 @@
   urlcolor=accent,
 }
 
-\titlespacing{\section}{0pt}{1em}{0.5em}
+\titlespacing{\section}{0pt}{0.6em}{0.3em}
 
 \titleformat{\section}
-  {\Large\bfseries\color{primary}}
+  {\large\bfseries\color{primary}}
   {}
   {0em}
   {}
   [\vspace{-0.5em}\rule{\textwidth}{0.4pt}]
 
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.5em}
+\setlength{\parskip}{0.25em}
 
-\setlist[itemize]{leftmargin=*}
+\setlist[itemize]{leftmargin=*, topsep=2pt, parsep=0pt}
 
 \begin{document}
 
-{\LARGE\bfseries\color{primary} {{.Basics.Name | escapeTeX}}}
+{\Large\bfseries\color{primary} {{.Basics.Name | escapeTeX}}}
 
-\vspace{0.5em}
+\vspace{0.25em}
 
 \newcolumntype{L}{>{\raggedright\arraybackslash}X}
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}
@@ -60,13 +60,24 @@
 \section*{Experience}
 {{range .Work}}
 \needspace{6\baselineskip}
-{{.Name | escapeTeX | printf "\\textbf{%s}"}} \hfill {{.Location | escapeTeX}} \\
+{{if .Roles}}{{.Name | escapeTeX | printf "\\textbf{%s}"}} \hfill {{.Location | escapeTeX}} \\
+{{- range .Roles}}
 {{.Position | escapeTeX | printf "\\textit{%s}"}} \hfill {{.StartDate | formatDate}} - {{.EndDate | formatDate}}
 {{if .Highlights}}
 \begin{itemize}
   \setlength\itemsep{0pt}
   {{range .Highlights}}\item {{. | escapeTeX}}{{end}}
 \end{itemize}
+{{end}}
+{{end}}
+{{else}}{{.Name | escapeTeX | printf "\\textbf{%s}"}} \hfill {{.Location | escapeTeX}} \\
+{{.Position | escapeTeX | printf "\\textit{%s}"}} \hfill {{.StartDate | formatDate}} - {{.EndDate | formatDate}}
+{{if .Highlights}}
+\begin{itemize}
+  \setlength\itemsep{0pt}
+  {{range .Highlights}}\item {{. | escapeTeX}}{{end}}
+\end{itemize}
+{{end}}
 {{end}}
 {{end}}
 
@@ -78,7 +89,7 @@
 \end{itemize}
 
 
-\needspace{3\baselineskip}
+\needspace{8\baselineskip}
 \section*{Notable Projects}
 {{range .Projects}}
 \needspace{3\baselineskip}
@@ -96,7 +107,8 @@
 {{range .Education}}
 \needspace{3\baselineskip}
 {{.Institution | escapeTeX | printf "\\textbf{%s}"}} \hfill {{.Location | escapeTeX}} \\
-{{.StudyType | escapeTeX | printf "\\textit{%s}"}} \hfill {{.StartDate | formatDate}} - {{.EndDate | formatDate}} \\
+{{.StudyType | escapeTeX | printf "\\textit{%s}"}} \hfill {{.StartDate | formatDate}} - {{.EndDate | formatDate}}{{if .Area}} \\
+{{.Area | escapeTeX}}{{end}}{{if .Score}} \hfill GPA: {{.Score}}{{end}}
 {{end}}
 
 \needspace{3\baselineskip}
