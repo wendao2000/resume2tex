@@ -1,0 +1,200 @@
+{{define "highlights"}}{{with nonempty .}}
+\begin{itemize}
+  {{range .}}\item {{. | escapeTeX}}
+  {{end}}
+\end{itemize}
+{{end}}{{end}}
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{needspace}
+\usepackage[breakable]{tcolorbox}
+
+\definecolor{primary}{RGB}{70,70,70}
+\definecolor{accent}{RGB}{0,112,201}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=accent,
+  filecolor=primary,
+  urlcolor=accent,
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.25em}
+\setlist[itemize]{leftmargin=*, itemsep=0pt, topsep=2pt, parsep=0pt}
+\pagestyle{empty}
+
+
+\newsavebox{\ResumeSectionMeasureBox}
+\newlength{\ResumeSectionBodyHeight}
+\newlength{\ResumeSectionTitleHeight}
+\newlength{\ResumeSectionHeight}
+\newlength{\ResumeSectionTopSep}
+\setlength{\ResumeSectionTopSep}{11pt}
+% Measure through public content hooks, then reuse the typeset material.
+\newcommand{\ResumeSectionMeasureBegin}{%
+  \setbox\ResumeSectionMeasureBox=\vbox\bgroup%
+}
+\newcommand{\ResumeSectionMeasureEnd}[1]{%
+  \par\unskip\egroup%
+  % Measurements must survive tcolorbox's title and body groups.
+  % A page-sized value suffices for oversized content; avoid dimension overflow.
+  \global#1=\textheight%
+  \ifnum\ht\ResumeSectionMeasureBox<\number\textheight%
+    \ifnum\ht\ResumeSectionMeasureBox<0 \else%
+      \global#1=\dimexpr\ht\ResumeSectionMeasureBox+\dp\ResumeSectionMeasureBox\relax%
+    \fi%
+  \fi%
+  \unvbox\ResumeSectionMeasureBox%
+}
+\newcommand{\ResumeSectionBefore}{%
+  \par\addvspace{0.6em}%
+  % All other frame, separator, and padding dimensions below are zero.
+  \setlength{\ResumeSectionHeight}{\dimexpr\ResumeSectionBodyHeight+\ResumeSectionTitleHeight+\ResumeSectionTopSep+2pt\relax}%
+  \ifdim\ResumeSectionHeight>\textheight%
+    \Needspace{4\baselineskip}%
+  \else%
+    \Needspace{\ResumeSectionHeight}%
+  \fi%
+  \noindent%
+}
+\newtcolorbox{resumesection}[1]{%
+  breakable,colframe=primary,colback=white,colbacktitle=white,coltitle=primary,
+  extras={frame empty,interior empty,interior titled empty},
+  fonttitle=\large\bfseries,
+  title={#1\par\vspace{7pt}\hrule height 0.4pt},
+  title after break={#1 (cont.)\par\vspace{7pt}\hrule height 0.4pt},
+  boxrule=0pt,titlerule=0pt,arc=0pt,outer arc=0pt,
+  boxsep=0pt,left=0pt,right=0pt,top=\ResumeSectionTopSep,bottom=0pt,
+  lefttitle=0pt,righttitle=0pt,toptitle=0pt,bottomtitle=0pt,
+  before=\ResumeSectionBefore,after={\par},
+  before title=\ResumeSectionMeasureBegin,
+  after title={\ResumeSectionMeasureEnd{\ResumeSectionTitleHeight}},
+  before upper={\setlength{\parindent}{0pt}\setlength{\parskip}{0.25em}\ResumeSectionMeasureBegin},
+  after upper={\ResumeSectionMeasureEnd{\ResumeSectionBodyHeight}},
+  pad before break=0pt,pad after break=\ResumeSectionTopSep,lines before break=3
+}
+
+\begin{document}
+
+{\Large\bfseries\color{primary} {{.Basics.Name | escapeTeX}}}
+{{if hasText .Basics.Label}}
+\par {{.Basics.Label | escapeTeX}}
+{{end}}
+
+{{with .ContactRows}}
+\vspace{0.25em}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\begin{tabularx}{\textwidth}{L R}
+{{range .}}{{range $i, $c := .}}{{if $i}} & {{end}}{{link $c.Target $c.Text}}{{end}} \\
+{{end}}\end{tabularx}
+{{end}}
+
+{{if hasText .Basics.Summary}}
+\begin{resumesection}{Summary}
+{{.Basics.Summary | escapeTeX}}
+\end{resumesection}
+{{end}}
+
+{{with .Experience}}
+\begin{resumesection}{Experience}
+{{range .}}
+\needspace{4\baselineskip}
+\textbf{ {{- link .URL .Name -}} }{{if hasText .Location}} \hfill {{.Location | escapeTeX}}{{end}}\par
+{{if hasText .Summary}}{{.Summary | escapeTeX}}\par{{end}}
+{{range .Roles}}
+{{if hasText .Position .StartDate .EndDate}}
+\textit{ {{- .Position | escapeTeX -}} } \hfill {{monthYearRange .StartDate .EndDate true}}\par
+{{end}}
+{{if hasText .Summary}}{{.Summary | escapeTeX}}\par{{end}}
+{{template "highlights" .Highlights}}
+{{end}}
+{{end}}
+\end{resumesection}
+{{end}}
+
+{{with .Skills}}
+\begin{resumesection}{Technical Skills}
+\begin{itemize}[label={}]
+  {{range .}}\item {{if hasText .Name}}\textbf{ {{- .Name | escapeTeX -}} }{{if nonempty .Keywords}}: {{end}}{{end}}{{joinNonempty .Keywords ", " | escapeTeX}}
+  {{end}}
+\end{itemize}
+\end{resumesection}
+{{end}}
+
+{{with .Projects}}
+\begin{resumesection}{Notable Projects}
+{{range .}}
+\needspace{4\baselineskip}
+\textbf{ {{- link .URL .Name -}} }\par
+{{if or (nonempty .Roles) (hasText .StartDate .EndDate)}}
+{{joinNonempty .Roles ", " | escapeTeX}}\hfill {{monthYearRange .StartDate .EndDate true}}\par
+{{end}}
+{{if nonempty .Keywords}}{\color{primary}\textbf{Technologies:} {{joinNonempty .Keywords ", " | escapeTeX}}}\par{{end}}
+{{if hasText .Summary}}{{.Summary | escapeTeX}}\par{{end}}
+{{template "highlights" .Highlights}}
+{{end}}
+\end{resumesection}
+{{end}}
+
+{{with .Education}}
+\begin{resumesection}{Education}
+{{range .}}
+\textbf{ {{- link .URL .Institution -}} }{{if hasText .Location}} \hfill {{.Location | escapeTeX}}{{end}}\par
+{{if hasText .StudyType .StartDate .EndDate}}
+\textit{ {{- .StudyType | escapeTeX -}} } \hfill {{yearRange .StartDate .EndDate false}}\par
+{{end}}
+{{if hasText .Area}}{{.Area | escapeTeX}}{{end}}{{if hasText .Score}} \hfill GPA: {{.Score | escapeTeX}}{{end}}
+{{if nonempty .Courses}}\par {{joinNonempty .Courses ", " | escapeTeX}}{{end}}
+{{end}}
+\end{resumesection}
+{{end}}
+
+{{with .Awards}}
+\begin{resumesection}{Awards}
+{{range .}}
+\textbf{ {{- .Awarder | escapeTeX -}} }{{if hasText .Location}} \hfill {{.Location | escapeTeX}}{{end}}\par
+\textit{ {{- .Title | escapeTeX -}} }{{if hasText .Date}} \hfill {{.Date | formatDate}}{{end}}\par
+{{if hasText .Summary}}{{.Summary | escapeTeX}}\par{{end}}
+{{end}}
+\end{resumesection}
+{{end}}
+
+{{with .Volunteer}}
+\begin{resumesection}{Volunteer Experience}
+{{range .}}
+\textbf{ {{- link .URL .Organization -}} }\par
+{{if hasText .Position .StartDate .EndDate}}
+\textit{ {{- .Position | escapeTeX -}} } \hfill {{monthYearRange .StartDate .EndDate true}}\par
+{{end}}
+{{if hasText .Summary}}{{.Summary | escapeTeX}}\par{{end}}
+{{template "highlights" .Highlights}}
+{{end}}
+\end{resumesection}
+{{end}}
+
+{{with .Publications}}
+\begin{resumesection}{Publications}
+{{range .}}
+\textbf{ {{- link .URL .Name -}} }\par
+{{if hasText .Publisher .ReleaseDate}}{{.Publisher | escapeTeX}}{{if hasText .ReleaseDate}} \hfill {{.ReleaseDate | formatDate}}{{end}}\par{{end}}
+{{if hasText .Summary}}{{.Summary | escapeTeX}}\par{{end}}
+{{end}}
+\end{resumesection}
+{{end}}
+
+{{with .Languages}}
+\begin{resumesection}{Languages}
+{{range $i, $l := .}}{{if $i}}, {{end}}{{$l.Language | escapeTeX}}{{if hasText $l.Fluency}}{{if hasText $l.Language}} ({{end}}{{$l.Fluency | escapeTeX}}{{if hasText $l.Language}}){{end}}{{end}}{{end}}
+\end{resumesection}
+{{end}}
+
+\end{document}

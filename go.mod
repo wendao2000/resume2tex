@@ -1,3 +1,3 @@
-module github.com/wendao2000/resumejson2tex
+module github.com/wendao2000/resume2tex
 
-go 1.23.2
+go 1.26.0

@@ -1,0 +1,317 @@
+{
+  "$schema": "../schemas/resume-v1.schema.json",
+  "schemaVersion": 1,
+  "person": {
+    "name": "Alex Park",
+    "headline": "Full Stack Software Engineer",
+    "summary": "Full-stack software engineer with 5+ years of experience building scalable web applications. Specialized in React, Node.js, and cloud architecture. Passionate about clean code, test-driven development, and mentoring. Active open-source contributor with 1000+ GitHub contributions in the last year. Regular tech blogger sharing insights about software architecture and development best practices.",
+    "location": "Mountain View, California, US",
+    "contacts": [
+      {
+        "type": "email",
+        "value": "alex.park@example.com"
+      },
+      {
+        "type": "website",
+        "value": "http://alexpark.dev",
+        "label": "alexpark.dev"
+      },
+      {
+        "type": "social",
+        "value": "https://www.linkedin.com/in/alexpark-dev",
+        "label": "LinkedIn"
+      },
+      {
+        "type": "social",
+        "value": "https://github.com/apark-dev",
+        "label": "GitHub"
+      }
+    ],
+    "contacts.extended": [
+      {
+        "type": "phone",
+        "value": "(650) 555-7890"
+      },
+      {
+        "type": "social",
+        "value": "https://dev.to/alexpark",
+        "label": "Dev.to"
+      }
+    ]
+  },
+  "experiences": [
+    {
+      "organization": "StreamLine Technologies",
+      "url": "http://streamline.example.com",
+      "location": "Mountain View, CA",
+      "roles": [
+        {
+          "title": "Senior Software Engineer",
+          "startDate": "2022-01-01",
+          "endDate": "2024-01-01",
+          "summary": "Tech lead for the core platform team, focusing on microservices architecture and real-time data processing.",
+          "highlights": [
+            "Led migration from monolith to microservices, reducing deployment time by 70%",
+            "Implemented real-time collaboration features using WebSocket, serving 100K+ concurrent users",
+            "Reduced API response times by 40% through caching optimization and query tuning"
+          ],
+          "highlights.extended": [
+            "Mentored 4 junior developers and established team code review practices"
+          ]
+        }
+      ]
+    },
+    {
+      "organization": "DataFlow Solutions",
+      "url": "http://dataflow.example.com",
+      "location": "San Francisco, CA",
+      "roles": [
+        {
+          "title": "Full Stack Engineer",
+          "startDate": "2019-03-01",
+          "endDate": "2021-12-31",
+          "summary": "Full-stack developer for data visualization and analytics platform.",
+          "highlights": [
+            "Built interactive dashboard using React and D3.js, processing 1M+ data points",
+            "Developed RESTful APIs using Node.js and Express, handling 500K daily requests",
+            "Implemented OAuth2 authentication system and role-based access control"
+          ],
+          "highlights.extended": [
+            "Reduced bundle size by 45% through code splitting and lazy loading"
+          ]
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Frontend Development",
+      "items": [
+        "React",
+        "TypeScript",
+        "Redux"
+      ],
+      "items.extended": [
+        "Webpack",
+        "Tailwind CSS"
+      ]
+    },
+    {
+      "category": "Backend Development",
+      "items": [
+        "Node.js",
+        "Express",
+        "Python",
+        "Django",
+        "RESTful APIs"
+      ]
+    },
+    {
+      "category": "DevOps & Cloud",
+      "items": [
+        "AWS",
+        "Docker",
+        "CI/CD",
+        "Kubernetes",
+        "GitHub Actions"
+      ]
+    },
+    {
+      "category": "Databases",
+      "items": [
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "Elasticsearch"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "ReactQuery Builder",
+      "summary": "Visual query builder component for React applications",
+      "context": "Open Source \u00b7 library",
+      "roles": [
+        "Creator",
+        "Maintainer"
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Jest",
+        "npm package"
+      ],
+      "startDate": "2022-03-01",
+      "endDate": "2024-01-01",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "http://github.com/apark-dev/react-query-builder"
+        }
+      ],
+      "highlights": [
+        "100k+ monthly npm downloads",
+        "98% test coverage"
+      ],
+      "highlights.extended": [
+        "4.8k+ GitHub stars",
+        "Used by companies like TechCorp and DataViz Inc."
+      ],
+      "tags": [
+        "engineering"
+      ]
+    }
+  ],
+  "projects.extended": [
+    {
+      "name": "DevTools Suite",
+      "summary": "Collection of CLI tools for developer productivity",
+      "context": "Open Source \u00b7 application",
+      "roles": [
+        "Lead Developer"
+      ],
+      "technologies": [
+        "Node.js",
+        "CLI",
+        "Developer Tools",
+        "npm"
+      ],
+      "startDate": "2023-01-01",
+      "endDate": "2024-01-01",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "http://github.com/apark-dev/devtools-suite"
+        }
+      ],
+      "highlights": [
+        "1.2k+ GitHub stars",
+        "Featured in Awesome Node.js repository",
+        "Active community with 30+ contributors"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of California, Berkeley",
+      "url": "https://www.berkeley.edu/",
+      "degree": "Bachelor",
+      "field": "Computer Science",
+      "startDate": "2015-08-01",
+      "endDate": "2019-05-01",
+      "score": "3.8",
+      "courses": [
+        "Data Structures and Algorithms",
+        "Web Architecture",
+        "Database Systems",
+        "Software Engineering"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Innovation Excellence Award",
+      "issuer": "StreamLine Technologies",
+      "date": "2023-11-01",
+      "summary": "Awarded for developing an innovative real-time collaboration system."
+    }
+  ],
+  "volunteering": [
+    {
+      "organization": "Code For Good",
+      "title": "Technical Lead",
+      "url": "http://codeforgood.org",
+      "startDate": "2021-06-01",
+      "endDate": "2024-01-01",
+      "summary": "Lead developer for non-profit projects.",
+      "highlights": [
+        "Developed pro-bono websites for 3 local non-profits",
+        "Organized monthly coding workshops for beginners"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "title": "Building Scalable Real-time Applications with WebSocket",
+      "publisher": "Medium",
+      "date": "2023-06-01",
+      "url": "http://medium.com/@alexpark/websocket-scale",
+      "summary": "Technical deep-dive into building and scaling WebSocket applications."
+    }
+  ],
+  "languages": [
+    {
+      "name": "English",
+      "proficiency": "Native speaker"
+    },
+    {
+      "name": "Korean",
+      "proficiency": "Conversational"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Open Source",
+      "keywords": [
+        "React Libraries",
+        "Developer Tools",
+        "Testing Frameworks"
+      ]
+    },
+    {
+      "name": "Tech Writing",
+      "keywords": [
+        "Software Architecture",
+        "Best Practices",
+        "Tutorial Writing"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "name": "Michael Torres",
+      "text": "Alex is an exceptional engineer who combines deep technical expertise with great communication skills. Their contributions to our microservices architecture were instrumental to our platform's success."
+    }
+  ],
+  "defaultProfile": "engineering",
+  "profiles": {
+    "engineering": {
+      "includeTags": [
+        "engineering"
+      ],
+      "summary": "Full-stack software engineer building web applications with React, Node.js, and cloud infrastructure. Experience includes leading a microservices migration, delivering real-time collaboration features, and mentoring junior developers.",
+      "settings": {
+        "sections": [
+          "summary",
+          "experiences",
+          "skills",
+          "projects",
+          "education",
+          "publications",
+          "languages"
+        ]
+      }
+    },
+    "detailed": {
+      "settings": {
+        "sections": [
+          "summary",
+          "experiences",
+          "skills",
+          "projects",
+          "education",
+          "awards",
+          "volunteering",
+          "publications",
+          "languages",
+          "interests",
+          "references"
+        ],
+        "paper": "letter",
+        "dateStyle": "source",
+        "showScore": true,
+        "showCourses": true
+      }
+    }
+  }
+}

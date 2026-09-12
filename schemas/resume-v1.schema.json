@@ -1,0 +1,936 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Design draft only. The application does not accept this format yet. Calendar validity, date ordering, parsed URL and contact-type agreement, named profile existence, selected photo availability, and duplicate JSON object keys require validation beyond this structural schema. Unknown filter tags produce warnings; extended is a recognized reserved extension-group label even if no extension arrays exist. Extension enablement, tag filtering, and output ordering are rendering semantics, not structural validation. Array order is authored presentation order; defaults describe proposed behavior and do not insert values.",
+  "title": "Resume document, version 1 (draft)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "person"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "person": {
+      "$ref": "#/$defs/person"
+    },
+    "experiences": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/experience"
+      }
+    },
+    "experiences.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/experience"
+      },
+      "description": "Additional experiences entries under this literal dotted key. Uses the same entry format as experiences; experiences may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/skillGroup"
+      }
+    },
+    "skills.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/skillGroup"
+      },
+      "description": "Additional skills entries under this literal dotted key. Uses the same entry format as skills; skills may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/project"
+      }
+    },
+    "projects.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/project"
+      },
+      "description": "Additional projects entries under this literal dotted key. Uses the same entry format as projects; projects may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/education"
+      }
+    },
+    "education.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/education"
+      },
+      "description": "Additional education entries under this literal dotted key. Uses the same entry format as education; education may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "awards": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/award"
+      }
+    },
+    "awards.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/award"
+      },
+      "description": "Additional awards entries under this literal dotted key. Uses the same entry format as awards; awards may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "volunteering": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/volunteering"
+      }
+    },
+    "volunteering.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/volunteering"
+      },
+      "description": "Additional volunteering entries under this literal dotted key. Uses the same entry format as volunteering; volunteering may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "publications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/publication"
+      }
+    },
+    "publications.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/publication"
+      },
+      "description": "Additional publications entries under this literal dotted key. Uses the same entry format as publications; publications may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/language"
+      }
+    },
+    "languages.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/language"
+      },
+      "description": "Additional languages entries under this literal dotted key. Uses the same entry format as languages; languages may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "interests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/interest"
+      }
+    },
+    "interests.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/interest"
+      },
+      "description": "Additional interests entries under this literal dotted key. Uses the same entry format as interests; interests may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    "references.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reference"
+      },
+      "description": "Additional references entries under this literal dotted key. Uses the same entry format as references; references may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "certificates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/certificate"
+      }
+    },
+    "certificates.extended": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/certificate"
+      },
+      "description": "Additional certificates entries under this literal dotted key. Uses the same entry format as certificates; certificates may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+    },
+    "settings": {
+      "$ref": "#/$defs/settings"
+    },
+    "profiles": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/text"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/profile"
+      },
+      "description": "Optional named overrides. With no selected profile and no defaultProfile, render the base resume."
+    },
+    "defaultProfile": {
+      "$ref": "#/$defs/text",
+      "description": "Optional profile name. It must match a key in profiles; this requires semantic validation."
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}(?:-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12][0-9]|3[01]))?)?$",
+      "description": "An authored year, year and month, or complete date. Calendar validity and chronological ordering require semantic validation."
+    },
+    "webURL": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://\\S+$"
+    },
+    "contactURL": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^(?:https?://|mailto:|tel:)\\S+$"
+    },
+    "texts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text"
+      },
+      "uniqueItems": true,
+      "description": "Optional labels for profile filtering. Labels may repeat across records. An empty array is equivalent to no tags. Prefer literal .extended arrays for additional content; the extended label remains valid as an ordinary tag and is also reserved to enable extension arrays in includeTags."
+    },
+    "textItem": {
+      "description": "Write ordinary text as a string. Use an object only when the text needs its own filter tags.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/text"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "text"
+          ],
+          "properties": {
+            "text": {
+              "$ref": "#/$defs/text"
+            },
+            "tags": {
+              "$ref": "#/$defs/tags"
+            }
+          }
+        }
+      ]
+    },
+    "textItems": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/textItem"
+      }
+    },
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "headline": {
+          "$ref": "#/$defs/text"
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "location": {
+          "$ref": "#/$defs/text"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/contact"
+          }
+        },
+        "contacts.extended": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/contact"
+          },
+          "description": "Additional contacts entries under this literal dotted key. Uses the same entry format as contacts; contacts may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+        },
+        "photo": {
+          "$ref": "#/$defs/photo"
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "email",
+            "phone",
+            "website",
+            "social",
+            "other"
+          ]
+        },
+        "value": {
+          "$ref": "#/$defs/text"
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "url": {
+          "$ref": "#/$defs/contactURL"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      },
+      "description": "Multiple contacts may have the same type. Value is an email address, phone number, website/social URL, or other display text appropriate to its type; label optionally controls displayed text. URL supplies an explicit link target."
+    },
+    "photo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "alt"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/text"
+        },
+        "alt": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "experience": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "organization",
+        "roles"
+      ],
+      "properties": {
+        "organization": {
+          "$ref": "#/$defs/text"
+        },
+        "url": {
+          "$ref": "#/$defs/webURL"
+        },
+        "location": {
+          "$ref": "#/$defs/text"
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/role"
+          }
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      },
+      "description": "One employer with one or more roles in authored order, including for a single position. Summary describes the employer; titles, dates, role summaries, and highlights belong to roles. Filtering out all roles omits the employer from rendered output."
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "startDate": {
+          "$ref": "#/$defs/date"
+        },
+        "endDate": {
+          "$ref": "#/$defs/date"
+        },
+        "ongoing": {
+          "type": "boolean",
+          "default": false
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "highlights": {
+          "$ref": "#/$defs/textItems"
+        },
+        "highlights.extended": {
+          "$ref": "#/$defs/textItems",
+          "description": "Additional highlights entries under this literal dotted key. Uses the same entry format as highlights; highlights may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      },
+      "if": {
+        "required": [
+          "ongoing"
+        ],
+        "properties": {
+          "ongoing": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "startDate"
+        ],
+        "not": {
+          "required": [
+            "endDate"
+          ]
+        }
+      },
+      "description": "A position within an employer. Summary and highlights describe this role. Only ongoing: true means Present and requires startDate without endDate; omitting endDate never implies an ongoing role."
+    },
+    "volunteering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "organization",
+        "title"
+      ],
+      "properties": {
+        "organization": {
+          "$ref": "#/$defs/text"
+        },
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "url": {
+          "$ref": "#/$defs/webURL"
+        },
+        "location": {
+          "$ref": "#/$defs/text"
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "highlights": {
+          "$ref": "#/$defs/textItems"
+        },
+        "highlights.extended": {
+          "$ref": "#/$defs/textItems",
+          "description": "Additional highlights entries under this literal dotted key. Uses the same entry format as highlights; highlights may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        },
+        "startDate": {
+          "$ref": "#/$defs/date"
+        },
+        "endDate": {
+          "$ref": "#/$defs/date"
+        },
+        "ongoing": {
+          "type": "boolean",
+          "default": false
+        },
+        "context": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "if": {
+        "required": [
+          "ongoing"
+        ],
+        "properties": {
+          "ongoing": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "startDate"
+        ],
+        "not": {
+          "required": [
+            "endDate"
+          ]
+        }
+      },
+      "description": "Only ongoing: true means Present and requires startDate without endDate. Omitting endDate never implies an ongoing entry."
+    },
+    "skillGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/text"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/textItem"
+          }
+        },
+        "items.extended": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/textItem"
+          },
+          "description": "Additional items entries under this literal dotted key. Uses the same entry format as items; items may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "items"
+          ],
+          "properties": {
+            "items": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "required": [
+            "items.extended"
+          ],
+          "properties": {
+            "items.extended": {
+              "minItems": 1
+            }
+          }
+        }
+      ],
+      "description": "A named skill category requires at least one entry in items or items.extended. Either array may be omitted or empty when the other is nonempty. Omit the category from rendered output if filtering removes all of its items."
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "context": {
+          "$ref": "#/$defs/text"
+        },
+        "roles": {
+          "$ref": "#/$defs/texts"
+        },
+        "technologies": {
+          "$ref": "#/$defs/textItems"
+        },
+        "technologies.extended": {
+          "$ref": "#/$defs/textItems",
+          "description": "Additional technologies entries under this literal dotted key. Uses the same entry format as technologies; technologies may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/link"
+          }
+        },
+        "highlights": {
+          "$ref": "#/$defs/textItems"
+        },
+        "highlights.extended": {
+          "$ref": "#/$defs/textItems",
+          "description": "Additional highlights entries under this literal dotted key. Uses the same entry format as highlights; highlights may be omitted. When enabled, append these entries after the base array, preserving array order without merging or deduplication. Enabled when includeTags is absent or contains the exact reserved label extended. Entries are then filtered by their own tags; an excluded parent hides all its descendants."
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        },
+        "startDate": {
+          "$ref": "#/$defs/date"
+        },
+        "endDate": {
+          "$ref": "#/$defs/date"
+        },
+        "ongoing": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "if": {
+        "required": [
+          "ongoing"
+        ],
+        "properties": {
+          "ongoing": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "startDate"
+        ],
+        "not": {
+          "required": [
+            "endDate"
+          ]
+        }
+      },
+      "description": "Only ongoing: true means Present and requires startDate without endDate. Omitting endDate never implies an ongoing entry."
+    },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "url"
+      ],
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "url": {
+          "$ref": "#/$defs/webURL"
+        }
+      }
+    },
+    "education": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "institution"
+      ],
+      "properties": {
+        "institution": {
+          "$ref": "#/$defs/text"
+        },
+        "url": {
+          "$ref": "#/$defs/webURL"
+        },
+        "location": {
+          "$ref": "#/$defs/text"
+        },
+        "degree": {
+          "$ref": "#/$defs/text"
+        },
+        "field": {
+          "$ref": "#/$defs/text"
+        },
+        "score": {
+          "$ref": "#/$defs/text"
+        },
+        "scoreLabel": {
+          "$ref": "#/$defs/text"
+        },
+        "courses": {
+          "$ref": "#/$defs/texts"
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        },
+        "startDate": {
+          "$ref": "#/$defs/date"
+        },
+        "endDate": {
+          "$ref": "#/$defs/date"
+        },
+        "ongoing": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "if": {
+        "required": [
+          "ongoing"
+        ],
+        "properties": {
+          "ongoing": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "startDate"
+        ],
+        "not": {
+          "required": [
+            "endDate"
+          ]
+        }
+      },
+      "description": "Only ongoing: true means Present and requires startDate without endDate. Omitting endDate never implies an ongoing entry."
+    },
+    "award": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "issuer": {
+          "$ref": "#/$defs/text"
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "location": {
+          "$ref": "#/$defs/text"
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "publisher": {
+          "$ref": "#/$defs/text"
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "url": {
+          "$ref": "#/$defs/webURL"
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "language": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "proficiency"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "proficiency": {
+          "$ref": "#/$defs/text"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "interest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "keywords": {
+          "$ref": "#/$defs/texts"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "relationship": {
+          "$ref": "#/$defs/text"
+        },
+        "text": {
+          "$ref": "#/$defs/text"
+        },
+        "contact": {
+          "$ref": "#/$defs/text"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "certificate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "issuer"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "issuer": {
+          "$ref": "#/$defs/text"
+        },
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "expires": {
+          "$ref": "#/$defs/date"
+        },
+        "credentialId": {
+          "$ref": "#/$defs/text"
+        },
+        "url": {
+          "$ref": "#/$defs/webURL"
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "tags": {
+          "$ref": "#/$defs/tags"
+        }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "summary",
+              "experiences",
+              "skills",
+              "projects",
+              "education",
+              "awards",
+              "volunteering",
+              "publications",
+              "languages",
+              "interests",
+              "references",
+              "certificates"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Section order and visibility. Use base section names for both base and .extended entries. Omitted sections are hidden; selected sections with no entries after filtering are omitted from rendered output."
+        },
+        "paper": {
+          "type": "string",
+          "enum": [
+            "a4",
+            "letter"
+          ],
+          "default": "a4"
+        },
+        "dateStyle": {
+          "type": "string",
+          "enum": [
+            "source",
+            "month-year",
+            "year"
+          ],
+          "default": "month-year"
+        },
+        "showScore": {
+          "type": "boolean",
+          "default": false
+        },
+        "showCourses": {
+          "type": "boolean",
+          "default": false
+        },
+        "showPhoto": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "includeTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Include untagged records and records with at least one matching tag. Literal .extended arrays are enabled only when this filter contains the exact reserved label extended. Their entries are then filtered using their own tags, just like base entries; extended does not bypass those tags. An excluded parent removes its descendants. Each retained child is filtered using its own tags, without inherited tags. Omit this field to disable tag filtering and enable all extension arrays. Base entries precede extension entries without merging, deduplication, or interleaving."
+        },
+        "headline": {
+          "$ref": "#/$defs/text"
+        },
+        "summary": {
+          "$ref": "#/$defs/text"
+        },
+        "settings": {
+          "$ref": "#/$defs/settings"
+        }
+      },
+      "description": "An optional override of the base resume. Fields omitted here retain their base values; settings merge by field. Authored array order is preserved."
+    }
+  },
+  "description": "Literal .extended sibling arrays hold additional content. Supported at the root for experiences, skills, projects, education, awards, volunteering, publications, languages, interests, references, and certificates; in person for contacts; in experience roles and volunteering records for highlights; in skill groups for items; and in projects for technologies and highlights. Dots are part of each JSON property name, not nested paths. Other .extended properties are unsupported. Base entries precede enabled extension entries."
+}

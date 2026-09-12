@@ -1,0 +1,40 @@
+{
+  "$schema": "../schemas/resume-v1.schema.json",
+  "schemaVersion": 1,
+  "person": {
+    "name": "Alex Park",
+    "headline": "Full Stack Software Engineer",
+    "location": "Mountain View, California, US",
+    "contacts": [
+      {"type": "email", "value": "alex.park@example.com"},
+      {"type": "website", "value": "http://alexpark.dev"}
+    ]
+  },
+  "experiences": [
+    {
+      "organization": "StreamLine Technologies",
+      "roles": [
+        {
+          "title": "Senior Software Engineer",
+          "startDate": "2022-01-01",
+          "endDate": "2024-01-01",
+          "summary": "Tech lead for the core platform team, focusing on microservices architecture and real-time data processing.",
+          "highlights": [
+            "Led migration from monolith to microservices, reducing deployment time by 70%",
+            "Reduced API response times by 40% through caching optimization and query tuning"
+          ]
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Frontend Development",
+      "items": ["React", "TypeScript"]
+    },
+    {
+      "category": "Backend Development",
+      "items": ["Node.js", "Express", "Python"]
+    }
+  ]
+}
